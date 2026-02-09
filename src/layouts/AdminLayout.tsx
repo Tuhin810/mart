@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
 import { auth } from '../services/firebase';
 import {
     LayoutGrid,
@@ -9,32 +7,32 @@ import {
     Bell,
     Search,
     Package,
-    ShoppingCart,
     MessageSquare,
     HelpCircle,
-    ChevronDown,
-    BarChart3,
-    Sun,
-    Moon
+    BarChart3
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const { user } = useAuth();
     const location = useLocation();
-    const [analyticsOpen, setAnalyticsOpen] = useState(true);
 
-    const menuItems = [
+    interface MenuItem {
+        icon: any;
+        label: string;
+        path: string;
+        badge?: string;
+    }
+
+    const menuItems: MenuItem[] = [
         { icon: LayoutGrid, label: 'Dashboard', path: '/super-admin' },
-        { icon: MessageSquare, label: 'Tasks', path: '/super-admin/tasks', badge: '12+' },
-        { icon: Package, label: 'Calendar', path: '/super-admin/calendar' },
+        { icon: Package, label: 'Businesses', path: '/super-admin/businesses' },
+        { icon: Users, label: 'Users', path: '/super-admin/users' },
         { icon: BarChart3, label: 'Analytics', path: '/super-admin/analytics' },
-        { icon: Users, label: 'Team', path: '/super-admin/team' },
     ];
 
     const generalItems = [
         { icon: Settings, label: 'Settings', path: '/super-admin/settings' },
-        { icon: HelpCircle, label: 'Help', path: '/super-admin/help' },
+        { icon: HelpCircle, label: 'Help & Support', path: '/super-admin/help' },
     ];
 
     return (
